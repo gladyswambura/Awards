@@ -1,0 +1,31 @@
+{% extends 'registration/base.html' %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="col-md-4">
+    
+     {% if messages %}
+     {% for message in messages %}
+     <div class="alert alert-{{message.tags}}">
+         {{ message }}
+     </div>
+     {% endfor %}
+     {% endif %}
+
+    {% if form.errors %}
+    <p>Some information might be incorrect</p>
+    {% endif %}
+
+    <div class="panel panel-default">
+        <form action="/accounts/register/" method="Post">
+            {% Csrf_token %}
+            {% bootstrap_form form %}
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+            </div>
+            <input type="hidden" name="next" value="{{next}}">
+        </form>
+    </div>
+
+    <small>Already a member? <a href="/accounts/login">Login</a></small>
+</div>
+{% endblock content %}
