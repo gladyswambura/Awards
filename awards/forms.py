@@ -23,6 +23,6 @@ class ProfileUpdateForm(forms.ModelForm):
         model = Profile
         exclude = ['user']
         widgets = {
-          'bio': forms.Textarea(attrs={'rows':2, 'cols':10,}),
+          'bio': forms.Textarea(attrs={'rows':8, 'cols':10,}),
         }
         
