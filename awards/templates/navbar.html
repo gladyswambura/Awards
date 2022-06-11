@@ -10,7 +10,7 @@
         <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
             <ul class="navbar-nav">
                 <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="#" class="nav-link px-2 text-white">#StopWarInUkraine <img src="" alt="">Save the
+                    <li><a href="https://www.savethechildren.org/us/where-we-work/ukraine" blank="True" class="nav-link px-2 text-white">#StopWarInUkraine <img src="" alt="">Save the
                             children</a></li>
                 </ul>
             </ul>
@@ -60,16 +60,15 @@
                             <li><a class="dropdown-item" href="#"><img src="#" rel="stylesheet" type="text/css" viewBox="0 0 24 24"
                                         width="15">Change Passowrd</a>
                             </li>
+                            <li><a class="dropdown-item" href="/logout"><img src="#" rel="stylesheet" type="text/css" viewBox="0 0 24 24"
+                                        width="15">logout</a>
+                            </li>
                     </li>
                 </ul>
                     <li class="nav-item">
-                        <a href=""><button type="button" class="btn btn-outline-info btn-sm text-white bg-dark">Submit Your
+                        <a href="{%url 'new-site'%}"><button type="button" class="btn btn-outline-info btn-sm text-white bg-dark">Submit Your
                                 Site!</button></a>
                     </li>
-                    <li class="nav-item">
-                        <a href=""><button type="button" class="btn btn-outline-info btn-sm">logout</button></a>
-                    </li>
-
                 {% else %}
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
