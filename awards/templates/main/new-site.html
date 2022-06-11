@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}New-Site (Awards){% endblock title %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <div class="jumbotron jumbotron-fluid bg-light pb-3 pt-3">
+        <h2 class="display-5 text-center font-weight-bold"> SUBMIT YOUR SITE!! </h2>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+            <form action="{%url 'new-project'%}" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {% bootstrap_form form%}
+                <div class="form-group">
+                    <button type="submit" class="btn blue-gradient btn-lg mt-2 font-weight-bold btn-block"> Submit Site</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-4"></div>
+</div>
