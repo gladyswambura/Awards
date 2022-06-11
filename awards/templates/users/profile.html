@@ -1,0 +1,108 @@
+{% extends "users/base.html" %}
+{% block title %}Awards-Profile{% endblock title %}
+{% load bootstrap4 %}
+{% block content %}
+<div class="container">
+    <br><br><br><br>
+        <div class="row">
+
+            <div class="d-flex col-md-4">
+                <div class="media-image">
+                    {% if user.profile.photo %}
+                    <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }}" alt="course image"
+                        height="200" width="200">
+                    {% else %}
+                    <img class="rounded-circle account-img" src="https://source.unsplash.com/1600x900/?user,profile"
+                        alt="course image" height="200" width="200">
+                    {% endif %}
+                </div>
+                <div class="col-md-2"></div>
+                <div class="content">
+                    <h4 class="font-weight-bold">{{user.username}} </h4>
+                    <h6 class="font-weight-bold"> Email: <i class="text-secondary"> {{user.email}} </i></h6>
+                    <p> <span class="font-weight-bold"> Bio:</span> {{ user.profile.bio}} </p>
+                    <button class="btn btn-md btn-info font-weight-bold text-center" data-toggle="modal" data-target="#profile"> Edit
+                        Profile</button>
+                </div>
+            </div>
+
+            <div class="col-md-4"></div>
+        </div>
+    <hr>
+    <h4 class="font-weight-bold text-center">My Projects</h4>     
+    <hr>
+    <div class="col-md-4"></div>
+    {% if sites %}
+    {% for site_item in sites%}
+    <a href="/site/{{site_item.id}}"><img src="{{ site_item.site_image.url }}" alt=""
+            class="rounded img-fluid mr-1 pt-1 pb-1" style="width: 300px; height: 300px;"></a>
+    {% endfor %}
+
+    {% else %}
+    <p>You have not submitted any sites</p>
+    {% endif %}
+</div>
+
+<!-- modal -->
+<div class="modal fade" id="profile" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">New message</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {% bootstrap_form form%}
+                
+                    <div class="form-group">
+                        <button type="submit" class="btn blue-gradient btn-lg mt-2 font-weight-bold btn-block"> Update Profile</button>
+                    </div>
+                    <input type="hidden" name="next" value="{{next}}">
+                
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <!-- <button type="button" class="btn btn-primary">Send message</button> -->
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
+
+
+
+<!-- <div class="col-lg-4 mt-4 pt-2 ">
+    <div class="pb-2">
+        {% if user.profile.photo %}
+        <img src="{{ user.profile.photo.url }}" alt=""
+            class="d-flex justify-content-t rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
+        {% else %}
+        <img src="https://source.unsplash.com/1600x900/?user,profile" alt=""
+            class="d-flex justify-content-t rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
+        {% endif %}
+        <h4> <span class="font-weight-bold"> Username:</span> {{user.username}} </h4>
+        <p> <span class="font-weight-bold"> Email:</span> {{user.email}} </p>
+        <p> <span class="font-weight-bold"> Bio:</span> {{ user.profile.bio}} </p>
+        <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#profile"> Edit
+            Profile</button>
+    </div>
+    <hr>
+    <h4 class="font-weight-bold">My Projects</h4>
+    <hr>
+    {% if projects %}
+    {% for project_item in projects%}
+    <a href="/project/{{project_item.id}}"><img src="{{ project_item.project_image.url }}" alt=""
+            class="rounded img-fluid mr-1 pt-1 pb-1" style="width: 300px; height: 300px;"></a>
+    {% endfor %}
+
+    {% else %}
+    <p>You have not submitted any projects</p>
+    {% endif %}
+
+</div>
+</div>
