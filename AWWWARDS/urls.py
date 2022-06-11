@@ -16,9 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from registration.backends.simple.views import RegistrationView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/register/', RegistrationView.as_view(success_url='/profile'),name='registration_register'),
     path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     path('logout/', auth_views.logout_then_login),
 ]
