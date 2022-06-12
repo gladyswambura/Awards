@@ -3,14 +3,30 @@
 {% block content %}
 <div
     style="background:url('https://source.unsplash.com/user/erondu'); height: 60vh; background-size: cover; background-position: center;">
-    <h5 class="pt-5 font-weight-bolder font-size-bold text-white" style="margin-left: 200px;">Site of the day: {%now "jS
-        F Y H:i" %}</h5>
+    <h5 class="pt-5 font-weight-bolder font-size-bold text-white" style="margin-left: 200px;">Site of the day: {%now "jS F Y H:i" %}</h5>
+    <br>
+    <div class="box-info">
+        <div class="row">
+            <div class="image col-md-2">
+            <a href="/site/{{site_item.id}}"><img src="{{ random_site.site_image.url }}" alt="trending"
+                    style="margin-left: 200px;width: 150px; height: 150px;"></a>
+            </div>
+            <div class="names col-md-4">
+        <div class="row mx-auto D-block">
+            <h2 class="heading-large"><a href="{{ random_site.site_url }}" target="_blank"
+                     style="margin-left: 100px; color:white; font-weight:bold;">{{ random_site.site_name }}</a></h2>
+            <p style="margin-left: 100px; color:white; font-weight:bold;">By: {{ random_site.author.username }}</p>
+            <p style="margin-left: 100px; color:white; font-weight:bold;"> From: {{ random_site.country.name }} <img src="{{ random_site.country.flag }}" width="30"></p>
+        </div>
+        </div>
+        </div>
+    </div>
 </div>
 <div class="container-fluid mt-4">
     <h4 class="ml-5" style="text-decoration:underline">Sites of the day | Previous winners </h4>
 </div>
 <div class="container-fluid mt-4">
-    <div class="row pl-2 pr-2 ml-1 mr-1">
+    <div class="row ml-1">
 
         {% for site_item in sites %}
         <div class="col-lg-4">
@@ -35,7 +51,7 @@
                         <h5 class="card-title ml-4 text-center">{{ site_item.site_name }}</h5>
                         <div class="row ml-2">
                             <div class="col-lg-6 dark-text">{{site_item.country.name}} <small><img
-                                        src="{{site.country.flag}}" width="24" alt=" {{site.country.name}} flag">
+                                        src="{{site_item.country.flag}}" width="24" alt=" {{site.country.name}} flag">
                                     <span class="mr-1">{{site.country.name}}</span></small>
                             </div>
                             <div class="col-lg-6 dark-text d-flex justify-content-end"> <small>
@@ -43,9 +59,9 @@
                                 </small> </div>
                         </div>
                         <div class="card-footer">
-                            <small class="text-muted ml-2"><img src="{{ site_item.Author.profile.avarter.url }}" alt=""
+                            <small class="text-muted ml-2"><img src="{{ site_item.author.avatar.url }}" alt=""
                                     class="rounded-circle img-fluid mr-1" style="width: 30px;">
-                                BY {{site_item.Author.first_name|upper}} </small>
+                                By: {{site_item.author.username|upper}} </small>
                         </div>
                     </div>
                 </div>
