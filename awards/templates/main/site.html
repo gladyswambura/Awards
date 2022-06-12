@@ -1,0 +1,72 @@
+{%extends 'base.html'%}
+{%block title%}Awards-Site{%endblock title%}
+{% load static %}
+{% load bootstrap4%}
+{% load ratings %}
+{% block content %}
+<link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+<script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="row mt-4"></div>
+
+        <div class="col-lg-12">
+
+            <div class="card text-center" style="width:400px">
+                {% if site.site_image %}
+                <img class="card-img-top" src="{{site.site_image.url}}" alt="{{ site.site_name }}" style="width:100%">
+                {% else %}
+                <img class="card-img-top" src="https://source.unsplash.com/1600x900/?fun,vacation"
+                    alt="{{ site.site_name }}">
+                {% endif %}
+                <div class="card-body text-center">
+                    <h2 class="card-title font-weight-bold"><a>{{ site.site_name }}</a></h2>
+                    <p class="card-text">{{ site.site_description }}</p>
+                    <a href="{{site.link}}" target="_blank" class="btn btn-default font-weight-bold px-3"
+                        title="Visit site">Visit Website</a>
+                </div>
+
+                <div class="mt-2 pt-2">
+                    <h4>Vote</h4>
+                </div>
+                {% ratings site %}
+                <div class="row">
+                    <div class="col-lg-6 dark-text"> <small> <span class="mr-1"> From {{site.country.name}}</span>
+                            <img src="{{site.country.flag}}" width="24" alt="{{site.country.name}}'n flag"> </small>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <div class="col-lg-6 dark-text"> <small> Date Posted: {{site.pub_date|date:"d /m/Y"}}</small>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!-- Card -->
+
+            <!-- Card -->
+            <div class="card mt-5 pb-2 mb-2">
+
+                <!-- Card footer -->
+                <div class="card-footer bg-white">
+                    <h5 class="pt-2">CREDITS</h5>
+
+                    <hr>
+
+                    <small class="font-weight-bold ml-2"><img src="{{ site.Author.profile.avatar.url }}" alt=""
+                            class="rounded-circle img-fluid mr-1" style="width: 50px;">
+                        BY {{site.Author.first_name|upper}} <span class="ml-1 mr-1"> From
+                            {{site.country.name}}</span>
+                        <img src="{{site.country.flag}}" alt=" {{site.country.name}} flag"></small>
+                </div>
+
+            </div>
+
+        </div>
+        <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+</div>
+{% endblock %}
