@@ -31,7 +31,7 @@ This is an application that allows a user to post a project he/she has created a
 
 # **SETUP/INSTALLATION.**
 
-*** To view the app.Visit -> [Reviewsclone](https://github.com/gladyswambura/Awards)
+*** To view the app.Visit -> [Awardsclone](https://github.com/gladyswambura/Awards)
 
 1. Clone this repo: git clone https://github.com/gladyswambura/Awards.git.
 2. The repo comes in a zipped or compressed format. Extract to your prefered location and open it.
