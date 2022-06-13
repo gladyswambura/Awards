@@ -8,7 +8,7 @@
 
             <div class="d-flex col-md-4">
                 <div class="media-image">
-                    {% if user.profile.photo %}
+                    {% if user.profile.avatar %}
                     <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }}" alt="course image"
                         height="200" width="200">
                     {% else %}
@@ -71,38 +71,3 @@
     </div>
 </div>
 {% endblock content %}
-
-
-
-
-
-<!-- <div class="col-lg-4 mt-4 pt-2 ">
-    <div class="pb-2">
-        {% if user.profile.photo %}
-        <img src="{{ user.profile.photo.url }}" alt=""
-            class="d-flex justify-content-t rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
-        {% else %}
-        <img src="https://source.unsplash.com/1600x900/?user,profile" alt=""
-            class="d-flex justify-content-t rounded-circle mb-1 img-fluid mr-1" style="width: 150px;">
-        {% endif %}
-        <h4> <span class="font-weight-bold"> Username:</span> {{user.username}} </h4>
-        <p> <span class="font-weight-bold"> Email:</span> {{user.email}} </p>
-        <p> <span class="font-weight-bold"> Bio:</span> {{ user.profile.bio}} </p>
-        <button class="btn btn-md btn-outline-info font-weight-bold" data-toggle="modal" data-target="#profile"> Edit
-            Profile</button>
-    </div>
-    <hr>
-    <h4 class="font-weight-bold">My Projects</h4>
-    <hr>
-    {% if projects %}
-    {% for project_item in projects%}
-    <a href="/project/{{project_item.id}}"><img src="{{ project_item.project_image.url }}" alt=""
-            class="rounded img-fluid mr-1 pt-1 pb-1" style="width: 300px; height: 300px;"></a>
-    {% endfor %}
-
-    {% else %}
-    <p>You have not submitted any projects</p>
-    {% endif %}
-
-</div>
-</div>

@@ -99,8 +99,14 @@ class Rates(models.Model):
     date = models.DateTimeField(auto_now_add =True)
 
 
+    def save_rating(self):
+        self.save()
+    @classmethod
+    def get_ratings(cls, id):
+        ratings = Rates.objects.filter(post_id=id).all()
+        return ratings
     def __str__(self):
-        return self.site.site_name
+        return f'{self.site} Rating'
 
         
     

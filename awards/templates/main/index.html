@@ -31,9 +31,8 @@
     <div class="row ml-1">
 
         {% for site_item in sites %}
-        <div class="row col-lg-4">
-            <div class="card-deck">
-                <div class="row card mb-2 mt-2">
+        <div class="col-lg-4">
+                <div class="card mb-2 mt-2">
                     <!-- Card image -->
                     <div class="view overlay zoom">
                         {% if site_item.site_image %}
@@ -47,6 +46,9 @@
                         {% endif %}
                         <a href="/site/{{site_item.id}}">
                             <div class="mask rgba-black-light"></div>
+                    </div>
+
+                    <div class="overlay">
                     </div>
 
                     <div class="card-body pr-2 pl-2 pr-2 mr-2">
@@ -67,9 +69,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
         </div>
+        <div class="col-lg-4"></div>
                 {% endfor %}
+                
     </div>
 </div>
 {% endblock content %}

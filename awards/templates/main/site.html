@@ -26,7 +26,7 @@
                 <a href="{{site.site_url}}" target="_blank" class="btn btn-default font-weight-bold px-3"
                     title="Visit site">Visit Website</a>
             </div>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-md-3">
                     <h4>Design</h4>
                     {% ratings site %}
@@ -46,7 +46,7 @@
                 <div class="col-md-3 pt-5">
                     <h4 style="text-decoration:underline">Overall</h4>
                 </div>
-            </div>
+            </div> -->
             <br>
             <div class="row">
                 <div class="col-lg-6 dark-text"> <small><img src="{{site.country.flag}}" width="24"
@@ -56,14 +56,54 @@
                 <div class="col-lg-6 dark-text"> <small> Date Posted: {{site.pub_date|date:"d /m/Y"}} </small> </div>
             </div>
             <div class="card-footer bg-white">
-                <h5 class="pt-2">CREDITS</h5>
-                <hr>
+                <h5 class="pt-2">CREDITS::
                 <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }}" alt="course image"
-                    height="66" width="66">
-                <span class="ml-2">{{site.Author.first_name|upper}}<span class="ml-1 mr-1"></span>
+                    height="54" width="55">
+                <span class="ml-2">{{site.author.username}}</span></h5>
+                <hr>
             </div>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="col-md-4 ">
+                    <h2 class=" text-center mt-4" style="margin-left:20%;">Review Rate</h2>
+                    {% if rating_status %}
+                    <h5>You have already done your review</h5>
+                    {% else %}
+                    {% if user.is_authenticated %}
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <button class="btn btn-sm btn-info btn-block" style="margin-top:4px;" value="review"
+                            type="submit">Rate</button>
+                    </form>
+                    {% endif %}
+                    {% endif %}
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <div class="col-md-1"></div>
         </div>
     </div>
+
+    <h2 class="text-center">Ratings</h2>
+    <table class="table justify-content-center" style="border:1">
+        <th>Username</th>
+        <th>Design Rating</th>
+        <th>Usability Rating</th>
+        <th>Content Rating</th>
+        <th>Overal Score</th>
+        {% for reviews in reviews %}
+        <tr>
+            <td class="user">{{ reviews.user.username }}</td>
+            <td class="design">{{ reviews.design }}</td>
+            <td class="usability">{{ reviews.usability }}</td>
+            <td class="content">{{ reviews.content }}</td>
+            <td class="average">{{reviews.average }}</td>
+
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 </div>
 </div>
 {% endblock %}

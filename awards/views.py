@@ -1,3 +1,4 @@
+from ast import keyword
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import *
 from django.contrib import messages
@@ -5,8 +6,13 @@ import datetime as dt
 from django.contrib.auth.decorators import login_required
 from taggit.models import Tag
 from .models import *
+from django.urls import reverse
+from django.http.response import HttpResponse, HttpResponseRedirect
 # from django.core.exceptions import ObjectDoesNotExist
 import random
+from rest_framework.views import APIView
+from .serializer import ProfileSerializer, SiteSerializer
+from rest_framework.response import Response
 
 
 # Create your views here.
@@ -59,7 +65,12 @@ def search(request):
 
     else:
         message = ""
-        return render(request, 'main/search.html', {"message": message})
+    try:
+        sites = Sites.objects.filter()
+    except Sites.DoesNotExist:
+        raise Http404()
+
+    return render(request, 'main/search.html', {"message": message, 'sites': sites})
 
 
 @login_required(login_url='/accounts/login/')
@@ -97,13 +108,41 @@ def new_site(request):
 
 @login_required(login_url='/accounts/login/')
 def site_detail(request, id):
-    try:
         site = Sites.objects.get(pk = id)
-        
-    except ObjectDoesNotExist:
-        raise Http404()
-    
-    return render(request, 'main/site.html',{"site":site})
+        rate = Rates.objects.filter(site = site)
+        ratings = Rates.objects.all()
+        rating_status = None
+        if rate:
+            rating_status = True
+        else:
+            rating_status = False
+            current_user = request.user
+        if request.method == 'POST':
+            form = RatingsForm(request.POST)
+            if form.is_valid():
+                design = form.cleaned_data.get('design')
+                usability = form.cleaned_data['usability']
+                content = form.cleaned_data['content']
+                review = Rates()
+                review.site = site
+                review.user = request.user
+                review.design = design
+                review.usability = usability
+                review.content = content
+                review.average = (review.design + review.usability + review.content) / 3
+                review.save_rating()
+                return HttpResponseRedirect(reverse('site_results', args=(site.id,)))
+        else:
+            form = RatingsForm()
+        params = {
+        'site': site,
+        'form': form,
+        'rating_status': rating_status,
+        'reviews': ratings,
+        'ratings': rate
+
+        }
+        return render(request, 'main/site.html', params)   
 
 @login_required(login_url='/accounts/login/')
 def tagged(request, tag):
@@ -115,3 +154,19 @@ def tagged(request, tag):
         'sites':sites,
     }
     return render(request, 'main/index.html', context)
+
+
+
+class SitesList(APIView):
+    def get(self, request, format=None):
+        all_sites = Sites.objects.all()
+        serializers = SiteSerializer(all_sites, many=True)
+        return Response(serializers.data)
+    
+    
+class ProfileList(APIView):
+    def get(self, request, format=None):
+        all_profile = Profile.objects.all()
+        serializers = ProfileSerializer(all_profile, many=True)
+        return Response(serializers.data)
+    

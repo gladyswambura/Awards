@@ -1,28 +1,42 @@
 {% extends 'registration/base.html' %}
 {% load bootstrap4 %}
 {% block content %}
-<div class="col-md-4">
-    {% if form.errors %}
-    <p> Password or Username is incorrect </p>
-    {% endif %}
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="text-center font-weight-bold">Sign In</h3>
-        </div>
+<div class="container">
+    <br><br><br><br><br><br>
+    <div class="row">
+        <div class="col-md-3"></div>
 
-        <div class="panel-body">
-            <form action="/accounts/login/" method="post">
-                {% csrf_token %}
-                {% bootstrap_form form%}
+        <div class="col-md-6">
+            <div class="card bg-white justify-content-center" style="box-shadow: 0 4px 8px  rgba(201, 38, 38, 0.2);">
+                {% if form.errors %}
+                <p> Password or Username is incorrect </p>
+                {% endif %}
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="text-center font-weight-bold">Sign In</h3>
+                    </div>
 
-                <div class="form-group">
-                    <input type="submit" class="btn btn-primary btn-sm" value="Login">
+                    <div class="panel-body">
+                        <form class="m-5" action="/accounts/login/" method="post">
+                            {% csrf_token %}
+                            {% bootstrap_form form%}
+
+                            <div class="form-group">
+                                <input type="submit" class="btn btn-info btn-sm" value="Login">
+                            </div>
+                            <input type="hidden" name="next" value="{{next}}">
+                        </form>
+                    </div>
+                    <small class="pl-5">Not registered? <a class="pl-2 btn btn-outline-info btn-sm"
+                            href="/accounts/register">Sign
+                            Up</a></small>
                 </div>
-
-                <input type="hidden" name="next" value="{{next}}">
-            </form>
+                <br><br>
+            </div>
         </div>
+        <div class="col-md-3"></div>
     </div>
-    <small>Not registered? <a href="/accounts/register">Sign Up Here!</a></small>
 </div>
 {% endblock content %}
+
+<!-- <a class="password reset pl-5" href="#">Forgot password</a> -->

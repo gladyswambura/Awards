@@ -1,31 +1,50 @@
 {% extends 'registration/base.html' %}
 {% load bootstrap4 %}
+{% load static %}
 {% block content %}
-<div class="col-md-4">
-    
-     {% if messages %}
-     {% for message in messages %}
-     <div class="alert alert-{{message.tags}}">
-         {{ message }}
-     </div>
-     {% endfor %}
-     {% endif %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 
-    {% if form.errors %}
-    <p>Some information might be incorrect</p>
-    {% endif %}
+<div class="container align-center">
+    <br>
+    <div class="row mt-4">
+        <div class="col-md-1"></div>
+        <div class="card flex-row bg-white" style="width: 60rem;box-shadow: 0 4px 8px 0 rgba(116, 41, 41, 0.2);">
 
-    <div class="panel panel-default">
-        <form action="/accounts/register/" method="Post">
-            {% Csrf_token %}
-            {% bootstrap_form form %}
-            <div class="form-group">
-                <input type="submit" class="btn btn-primary btn-sm" value="Sign Up">
+        <div class="col-md-5 ml-5">
+            {% if messages %}
+            {% for message in messages %}
+            <div class="alert alert-{{message.tags}}">
+                {{ message }}
             </div>
-            <input type="hidden" name="next" value="{{next}}">
-        </form>
-    </div>
+            {% endfor %}
+            {% endif %}
 
-    <small>Already a member? <a href="/accounts/login">Login</a></small>
+            {% if form.errors %}
+            <p>Some information might be incorrect</p>
+            {% endif %}
+
+            <div class="panel panel-default card-body">
+                <div class="panel-heading">
+                    <h3 class="getstarted text-center font-weight-bold">Get Started</h3>
+                </div>
+                <div class="panel-body">
+                    <form action="/accounts/register/" method="Post">
+                        {% csrf_token %}
+                        {% bootstrap_form form %}
+                        <div class="form-group">
+                            <input type="submit" class="btn btn-info btn-sm" value="Sign Up">
+                        </div>
+                        <input type="hidden" name="next" value="{{next}}">
+                    </form>
+                </div>
+                <p class="pl-5">Already a member? <a class="pl-2 btn btn-outline-info btn-sm" href="/accounts/login">Login</a></p>
+            </div>
+        </div>
+        <div class="col-md-6 card-img-md-right  card-img-responsive">
+            <img src="{% static 'images/registration2.jpeg' %}" alt="" width="100%" height="100%">
+        </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
 </div>
 {% endblock content %}

@@ -33,8 +33,8 @@ urlpatterns = [
     path('search/', views.search, name='search'),
 
     # API SECTION
-    # path('api/site/', views.SitesList.as_view()),
-    # path('api/profile/', views.ProfileList.as_view()),
+    path('api/site/', views.SitesList.as_view()),
+    path('api/profile/', views.ProfileList.as_view()),
 
 
 
