@@ -34,7 +34,7 @@ class Sites(models.Model):
     country = CountryField(blank_label='(Chose a Country)', default='KE')
     tags = TaggableManager( help_text='A comma-separated list of tags.')
     site_description = models.TextField()
-    site_image = models.ImageField(upload_to="user_directory_path", verbose_name="Picture", default='default.jpg')
+    site_image = models.ImageField(upload_to="media/user_directory_path", verbose_name="Picture", default='default.jpg')
     pub_date = models.DateField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, blank=True)
     # author_profile = models.ForeignKey(Profile,on_delete=models.CASCADE, blank=True, default='1')
