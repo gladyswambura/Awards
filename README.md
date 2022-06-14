@@ -7,6 +7,9 @@ This is an application that allows a user to post a project he/she has created a
 ## DESCRIPTION
 - This project allows users to post their projects for other users to rate according to design, usability and content 
 
+![image](https://user-images.githubusercontent.com/97955649/173585749-fda0ee49-24ba-423c-a55c-9427b610844d.png)
+
+
 ## BDD 
 - Users need to Sign in to the application to post projects and review projects
 
